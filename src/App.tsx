@@ -1,25 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
+import React from 'react';
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+
+import { useAuthContext } from './context/AuthContext';
+import ProductDetail from './pages/ProductDetail';
+import Products from './pages/Products';
+
+
+
 function App() {
+  const { setIsLoggedIn, isLoggedIn } = useAuthContext();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Router>
+        <div>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <button type="button" onClick={() => {
+                  setIsLoggedIn?.(a => !a)
+
+                }}>{isLoggedIn ? "Log Out" : "Log In"}</button>
+              </li>
+            </ul>
+          </nav>
+
+          {/* A <Switch> looks through its children <Route>s and
+          renders the first one that matches the current URL. */}
+          <Switch>
+            <Route path="/:id">
+              <ProductDetail />
+            </Route>
+            <Route path="/">
+              <Products />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
   );
 }
 
