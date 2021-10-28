@@ -40,9 +40,9 @@ function ProductDetail() {
 
       setLoading(true);
       try {
-        const response = await fetch(`${API_URL}/product/${id}`, {
+        const response = await fetch(`${API_URL}/product/${id}`,  {
           headers: {
-            Authorization: `basic ${token}`
+            Authorization: token
           }
         });
         const data = await response.json();
@@ -56,7 +56,7 @@ function ProductDetail() {
 
     init();
 
-  }, [isLoggedIn, id]);
+  }, [isLoggedIn, token, id]);
 
 
   function renderItem() {

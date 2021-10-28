@@ -1,5 +1,5 @@
 function useAuthFetch<T>() : [T, boolean] {
-    return null;
+    return null as any;
 
     // TODO: retrieve token from context instead of parameter
 

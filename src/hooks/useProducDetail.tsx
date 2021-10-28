@@ -5,7 +5,7 @@ type ProductHooks = [Product, boolean]
 
 const useProducDetail = (id: string) : ProductHooks => {
     // TODO: useAuthFetch()
-    return null;
+    return null as any;
 }
 
 export default useProducDetail

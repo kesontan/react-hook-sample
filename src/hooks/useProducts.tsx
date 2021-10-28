@@ -5,7 +5,7 @@ type ProductsHook = [Product[], boolean]
 
 const useProducts = (): ProductsHook => {
     // TODO: useFetch()
-    return null;
+    return null as any;
 }
 
 export default useProducts
