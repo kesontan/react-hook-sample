@@ -1,11 +1,12 @@
-
 import { Product } from '../types/Product';
+import useFetch from './useFetch';
+
 
 type ProductsHook = [Product[], boolean]
 
 const useProducts = (): ProductsHook => {
-    // TODO: useFetch()
-    return null as any;
+    return useFetch<Product[]>("/product", []);
 }
 
 export default useProducts
+

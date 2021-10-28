@@ -7,8 +7,6 @@ import { useAuthContext } from './context/AuthContext';
 import ProductDetail from './pages/ProductDetail';
 import Products from './pages/Products';
 
-
-
 function App() {
   const { setIsLoggedIn, isLoggedIn } = useAuthContext();
 

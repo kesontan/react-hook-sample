@@ -1,42 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import useProducts from '../hooks/useProducts';
 import { Product } from '../types/Product';
 
-import {
-  Link
-} from "react-router-dom";
 
-
-const API_URL = "https://r25sdug75k.execute-api.ap-southeast-1.amazonaws.com/stage"
 
 function Products() {
-  const [loading, setLoading] = useState<boolean>();
-  const [products, setProducts] = useState<Product[]>([]);
-
-  // TODO: 1. change to :
-  // const [products, loadinfg] = useFetch<Product[]>("/product");
-
-  // TODO: 2. change to :
-  // const [product, loadinfg] = useProducts();
-
-  useEffect(() => {
-
-    async function init() {
-      setLoading(true);
-      try {
-        const response = await fetch(`${API_URL}/product`);
-        const data = await response.json();
-        setProducts(data);
-      } catch (ex) {
-        console.log(ex);
-        setProducts([])
-      }
-      setLoading(false)
-    }
-
-    init();
-
-  }, []);
-
+  const [products, loading] = useProducts();
 
   function renderItem({
     id,

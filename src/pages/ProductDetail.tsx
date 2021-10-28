@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react';
 import { useParams } from 'react-router';
-import { useAuthContext } from '../context/AuthContext';
-import { Product } from '../types/Product';
+import useProducDetail from '../hooks/useProducDetail';
 
 
-const API_URL = "https://r25sdug75k.execute-api.ap-southeast-1.amazonaws.com/stage"
 
 type Params = {
   id: string
@@ -13,51 +11,8 @@ type Params = {
 function ProductDetail() {
 
   const { id = "" } = useParams<Params>();
-  const { isLoggedIn, token } = useAuthContext();
-
-
-  const [loading, setLoading] = useState<boolean>();
-  const [product, setProduct] = useState<Product>();
-
-
-  // TODO: 1. change to :
-  // const [product, loadinfg] = useFetch<Product[]>("/product/${id}", { token });
-
-
-  // TODO: 2. change to :
-  // const [product, loadinfg] = useProductDetail(id);
-
-  const { name,
-    price,
-    qty } = product ?? {};
-
-  useEffect(() => {
-
-    async function init() {
-      if (!isLoggedIn) {
-        return;
-      }
-
-      setLoading(true);
-      try {
-        const response = await fetch(`${API_URL}/product/${id}`,  {
-          headers: {
-            Authorization: token
-          }
-        });
-        const data = await response.json();
-        setProduct(data);
-      } catch (ex) {
-        console.log(ex);
-        setProduct(undefined);
-      }
-      setLoading(false)
-    }
-
-    init();
-
-  }, [isLoggedIn, token, id]);
-
+  const [product, loading] = useProducDetail(id);
+  const { name, price, qty } = product ?? {};
 
   function renderItem() {
     return <div>
@@ -67,7 +22,7 @@ function ProductDetail() {
     </div>
   }
 
-  if (!isLoggedIn) {
+  if (!product) {
     return <div>Access Denied</div>
   }
 

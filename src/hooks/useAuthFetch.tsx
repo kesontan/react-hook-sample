@@ -1,10 +1,10 @@
-function useAuthFetch<T>() : [T, boolean] {
-    return null as any;
+import { useAuthContext } from "../context/AuthContext";
+import useFetch, { FetchHook } from "./useFetch";
 
-    // TODO: retrieve token from context instead of parameter
 
-    // TODO: return [response, loading];
-    
+function useAuthFetch<T>(url: string, defaultValue?: T): FetchHook<T> {
+    const { token } = useAuthContext();
+    return useFetch(token ? url : "", defaultValue, token);
 }
 
 export default useAuthFetch
