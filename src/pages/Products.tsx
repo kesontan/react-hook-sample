@@ -12,6 +12,12 @@ function Products() {
   const [loading, setLoading] = useState<boolean>();
   const [products, setProducts] = useState<Product[]>([]);
 
+  // TODO: 1. change to :
+  // const [products, loadinfg] = useFetch<Product[]>("/product");
+
+  // TODO: 2. change to :
+  // const [product, loadinfg] = useProducts();
+
   useEffect(() => {
 
     async function init() {

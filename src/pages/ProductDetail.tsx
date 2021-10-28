@@ -19,6 +19,14 @@ function ProductDetail() {
   const [loading, setLoading] = useState<boolean>();
   const [product, setProduct] = useState<Product>();
 
+
+  // TODO: 1. change to :
+  // const [product, loadinfg] = useFetch<Product[]>("/product/${id}", { token });
+
+
+  // TODO: 2. change to :
+  // const [product, loadinfg] = useProductDetail(id);
+
   const { name,
     price,
     qty } = product ?? {};
